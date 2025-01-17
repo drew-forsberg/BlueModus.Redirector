@@ -1,4 +1,6 @@
 using BlueModus.Redirector.Middleware;
+using BlueModus.Redirector.Middleware.Models;
+using BlueModus.Redirector.Middleware.Services;
 using BlueModus.Redirector.Web.Jobs;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Caching.Hybrid;

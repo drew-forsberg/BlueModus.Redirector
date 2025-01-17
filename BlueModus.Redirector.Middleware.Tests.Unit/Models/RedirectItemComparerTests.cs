@@ -1,4 +1,6 @@
-﻿namespace BlueModus.Redirector.Middleware.Tests.Unit
+﻿using BlueModus.Redirector.Middleware.Models;
+
+namespace BlueModus.Redirector.Middleware.Tests.Unit.Models
 {
     public class RedirectItemComparerTests
     {

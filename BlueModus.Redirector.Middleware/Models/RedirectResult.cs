@@ -1,4 +1,4 @@
-﻿namespace BlueModus.Redirector.Middleware
+﻿namespace BlueModus.Redirector.Middleware.Models
 {
     public class RedirectResult
     {

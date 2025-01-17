@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace BlueModus.Redirector.Middleware
+namespace BlueModus.Redirector.Middleware.Models
 {
     public class RedirectItem
     {

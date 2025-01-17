@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Caching.Hybrid;
+﻿using BlueModus.Redirector.Middleware.Models;
+using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace BlueModus.Redirector.Middleware
+namespace BlueModus.Redirector.Middleware.Services
 {
     public interface IRedirectItemService
     {

@@ -1,4 +1,4 @@
-﻿using BlueModus.Redirector.Middleware;
+﻿using BlueModus.Redirector.Middleware.Services;
 using Quartz;
 
 namespace BlueModus.Redirector.Web.Jobs
