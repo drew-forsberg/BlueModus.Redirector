@@ -1,4 +1,5 @@
 using BlueModus.Redirector.Middleware;
+using BlueModus.Redirector.Middleware.Configuration;
 using BlueModus.Redirector.Middleware.Models;
 using BlueModus.Redirector.Middleware.Services;
 using BlueModus.Redirector.Web.Jobs;
@@ -22,13 +23,23 @@ namespace BlueModus.Redirector.Web
 
             builder.Services.AddSingleton<IRedirectItemService, RedirectItemService>();
             builder.Services.AddSingleton<IRedirectItemComparer, RedirectItemComparer>();
+
+            var redirectRulesMiddlewareOptions = builder.Configuration
+                .GetSection(RedirectRulesMiddlewareOptions.RedirectRulesMiddleware)
+                .Get<RedirectRulesMiddlewareOptions>();
+
+            if (redirectRulesMiddlewareOptions == null)
+            {
+                throw new InvalidOperationException($"{RedirectRulesMiddlewareOptions.RedirectRulesMiddleware} configuration must be provided.");
+            }
+
 #pragma warning disable EXTEXP0018
             builder.Services.AddHybridCache(options =>
             {
                 options.DefaultEntryOptions = new HybridCacheEntryOptions
                 {
-                    Expiration = TimeSpan.FromMinutes(5),
-                    LocalCacheExpiration = TimeSpan.FromMinutes(5)
+                    Expiration = TimeSpan.FromSeconds(redirectRulesMiddlewareOptions.CacheDurationSeconds),
+                    LocalCacheExpiration = TimeSpan.FromSeconds(redirectRulesMiddlewareOptions.CacheDurationSeconds)
                 };
             });
 #pragma warning restore EXTEXP0018
@@ -44,7 +55,7 @@ namespace BlueModus.Redirector.Web
                             .ForJob(jobKey)
                             .WithSimpleSchedule(schedule =>
                                 schedule
-                                    .WithIntervalInSeconds(10)
+                                    .WithIntervalInSeconds(redirectRulesMiddlewareOptions.CacheRefreshIntervalSeconds)
                                     .RepeatForever()));
             });
 
